@@ -1,0 +1,13 @@
+{% include "common/header.html" %}
+<div class="container">
+    <div class="span4 center well">
+        <form class="form form-horizontal" method="POST">
+        {% csrf_token %}
+        {{ form.errors }}
+        {{ form.as_p }}
+        <input type="submit" value="login"/>
+        </form>
+    </div>
+</div>
+{% include "common/footer.html" %}
+{% include "common/close.html" %}

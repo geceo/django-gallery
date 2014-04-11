@@ -1,0 +1,72 @@
+{% include "common/header.html" %}
+
+<div id="content">
+<div id="leftPane">
+    <div id="leftPaneTitle">
+        <h1>{{gallery.title}}</h1>
+    </div>
+
+    <div id="controls"></div>
+
+     <div id="thumbs">
+        <ul class="thumbs noscript">
+            {% for image in images %}
+            <li>
+                <a class="thumb"  href="{{image.screen.url}}" ><img src="{{image.thumb.url}}"/></a>
+                {% if image.description %}
+                <span class="caption">
+                {{image.description|safe}}
+                </span>
+                {% endif %}
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+    <br>
+    <div id="leftPaneDescription">
+            <i>{{images|length}} pictures, created on {{gallery.created}}</i><br>
+            <br>
+            {{gallery.desc|safe}}
+    </div>
+</div>
+
+<div id="gallery">
+    <div id="caption"></div>
+    <div id="image"></div>
+</div>
+ 
+
+<div id="rightPane">
+</div>
+
+
+<script language="javascript">
+$(document).ready(function() {
+    $('#thumbs').galleriffic({
+        delay:                     2000, // in milliseconds
+        numThumbs:                 9, // The number of thumbnails to show page
+        preloadAhead:              40, // Set to -1 to preload all images
+        imageContainerSel:         '#image', // The CSS selector for the element within which the main slideshow image should be rendered
+        controlsContainerSel:      '#controls', // The CSS selector for the element within which the slideshow controls should be rendered
+        captionContainerSel:       '#caption', // The CSS selector for the element within which the captions should be rendered
+        loadingContainerSel:       '#loading', // The CSS selector for the element within which should be shown when an image is loading
+        enableTopPager:            false,
+        enableBottomPager:         true,
+        maxPagesToShow:            10,  // The maximum number of pages to display in either the top or bottom pager
+        renderSSControls:          true, // Specifies whether the slideshow's Play and Pause links should be rendered
+        renderNavControls:         true, // Specifies whether the slideshow's Next and Previous links should be rendered
+        playLinkText:              'Play',
+        pauseLinkText:             'Pause',
+        prevLinkText:              'Previous',
+        nextLinkText:              'Next',
+        nextPageLinkText:          'Next &rsaquo;',
+        prevPageLinkText:          '&lsaquo; Prev',
+        enableHistory:             false, // Specifies whether the url's hash and the browser's history cache should update when the current slideshow image changes
+        enableKeyboardNavigation:  true, // Specifies whether keyboard navigation is enabled
+        autoStart:                 true, // Specifies whether the slideshow should be playing or paused when the page first loads
+    });
+});
+</script>
+</div>
+{% include "common/footer.html" %}
+{% include "common/close.html" %}

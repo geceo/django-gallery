@@ -1,0 +1,27 @@
+{% include "common/header.html" %}
+        <div class="span12 well">
+        Bienvenue sur ma galerie en ligne. Afin de débuter votre visite, je vous invite à sélectionner une catégorie ci dessous:
+        </div>
+
+        {% for category in categories %}
+        <div class="span4 offset1 well">
+            <a href="/gallery/{{category.category.name|escape}}/">
+            <img class="span2" style="margin-left: 10px; margin-right: 15px;" src="{{category.cover.thumb.url}}"></img>
+            <h3>{{category.category.name}}</h3>
+            </a>
+            <p>
+            {{category.category.description|safe|truncatewords:20}}<br><i>{{category.nb_gals}} galeries</i></p>
+            </a>
+        </div>
+        {% endfor %}
+        </div> <!-- /div span12 -->
+
+</div> <!-- /container -->
+
+{% include "common/footer.html" %}
+
+<script>
+$('.thumbnail').popover();
+</script>
+
+{% include "common/close.html" %}

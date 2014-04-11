@@ -1,0 +1,144 @@
+{% include "common/header.html" %}
+    <div class="row">
+        <div class="span12 well center">
+            <div id="diaporama" class="carousel slide">
+                <div class="carousel-inner">
+                    {% if gallery.desc %}
+                    <div id="item0" class="image_square active item">
+                        <div style="margin: 0 20%;" class="center">
+                            <p>{{gallery.desc|safe}}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% for image in images %}
+                    {% if gallery.desc %}
+                    <div id='item{{forloop.counter}}' class="image_square item">
+                    {% else %}
+                    <div id='item{{forloop.counter0}}' class="image_square item">
+                    {% endif %}
+                        <img class="image center" src="{{image.screen.url}}">
+                        {% if image.description %}
+                        <div class="carousel-caption">
+                            <p>{{ image.description }}
+                                {% if image.forSale %}
+                                <a style="float: right" class="btn btn-mini btn-primary" href="#">Acheter un tirage (limité à {{image.maxPrints}})</a><br> 
+                                {% endif %}
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control left" href="#diaporama" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#diaporama" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hide" id="thumbs">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Vignettes</h3>
+        </div>
+        <div class="modal-body">
+            <ul class="thumbnails">
+            {% for image in images %}
+                <li class="span1">
+                    {% if gallery.desc %}
+                    <a href="#" id='thumb{{forloop.counter}}' class="thumbnail"><img alt="" src="{{image.thumb.url}}"></a>
+                    {% else %}
+                    <a href="#" id='thumb{{forloop.counter0}}' class="thumbnail"><img alt="" src="{{image.thumb.url}}"></a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal hide" id="comment">
+        <div class="modal-body">
+            <h3>Commentaires:</h3>
+            <div id="ajaxShowComments">
+
+            </div>
+            <div id="ajaxForm">
+                <h3>Exprimez vous!</h3>
+                <form id="ajaxFormComment" class="form" method="post">
+                {% csrf_token %}
+                    <div class="span2">
+                        <fieldset>
+                            <table class="table-condensed center">
+                            <tr>
+                                <tr><td>{{comment_form.author.label}}</td><td>{{comment_form.author }}</td></tr>
+                                <tr><td>{{comment_form.email.label}}</td><td>{{comment_form.email }}</td></tr>
+                                <tr><td>{{comment_form.url.label}} <i>(facultatif)</i></td><td>{{comment_form.url }}</td></tr>
+                            </tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div class="span2">
+                        <fieldset>
+                            <table class="table-condensed center">
+                                <tr><td>{{comment_form.title.label}}</td><td>{{comment_form.title}}</td></tr>
+                                <tr><td>{{comment_form.content.label}}</td><td>{{comment_form.content}}</td></tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div class="span1 center">
+                        <input class="btn btn-success btn-mini" type="submit"></input>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <script>
+        function updateComments() {
+        $.get('ajaxShowComment',function(data){
+            $('#ajaxShowComments').html(data);
+            });
+        }
+        
+        function postComment() {
+            $.post('ajaxAddComment',$('#ajaxFormComment').serialize(),function(data){
+            $('#ajaxForm').html(data);
+            updateComments();
+            });
+        }
+        updateComments();
+        $('#ajaxFormComment').submit(function() { postComment(); return(false);});
+        </script>
+    </div>
+
+
+</div> <!-- /container -->
+
+{% include "common/footer.html" %}
+<script language="javascript">
+$('#diaporama').carousel();
+$('.thumbnail').bind('click',function(event){
+    idThumb = event.currentTarget.id;
+    $('#diaporama').carousel(parseInt(idThumb.replace('thumb','')));
+    $('#thumbs').modal('toggle');
+});
+
+$('#diaporama').bind('slid',function(event){
+    idItem = $('.active').filter('.item')[0].id;
+    idItem = idItem.replace('item','thumb');
+    // first remove all highlight
+    $('.thumbnail').css('background-color','inherit');
+    // Then add it to current thumb
+    $('#'+idItem).css('background-color','black');
+});
+
+// prev / next
+$("body").keypress(function(event){
+	if ( event.keyCode == 37 ) {
+		$('#diaporama').carousel("prev");
+	}
+	if ( event.keyCode == 39 ) {
+		$('#diaporama').carousel("next");
+	}
+});
+</script>
+
+{% include "common/close.html" %}

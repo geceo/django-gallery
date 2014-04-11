@@ -1,0 +1,34 @@
+{% include "common/header.html" %}
+
+<div id="content">
+    Bienvenue sur mon portfolio en ligne.<br>
+    Les photos sont classées par catégorie ci-dessous:
+    <br>
+    <ul>
+    {% for category in galleryByCategory %}
+    <li class="nav-tabs">{{category.category.name}}</li>
+    <fieldset class="category">
+    <legend>{{category.category.name}}</legend>
+    <div class="categoryDescription">
+    {{ category.category.description|safe }}
+    </div>
+    <ul> 
+        {% for gallery in category.galleries %}
+        <li class="galleryBox">
+            <div class="galleryBox" id="gal{{gallery.gallery.id}}">
+                <span class="galleryTitle">{{gallery.gallery.title}}</span>
+                <img class="galleryIndex" src="{{gallery.cover.thumb.url}}"/>
+                <div class="galleryDescription">
+                {{gallery.gallery.desc|safe|truncatewords:6}}...<a class="galleryLink" href="/gallery/{{gallery.gallery.title}}/">watch gallery</a><br>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    </fieldset>
+    </ul>
+    {% endfor %}
+   
+</div>
+
+{% include "common/footer.html" %}

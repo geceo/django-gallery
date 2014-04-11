@@ -1,0 +1,17 @@
+<html>
+<head>
+	<title>Section uploads</title>
+</head>
+<body>
+	<div id="content">
+	Please select file to upload (may be a .zip archives or any image files):<br>
+	<form method="post" enctype="multipart/form-data">
+	<table>
+	{% csrf_token %}
+		{{ form }}
+	</form>
+	</table>
+	<input type="submit">
+	</div>
+</body>
+</html>

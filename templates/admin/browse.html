@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>Section uploads</title>
+</head>
+<body>
+	<div id="content">
+	{%if list%}
+		Your uploads:<br>
+		<table>
+		{%for obj in list%}
+			<a href="{{obj.screen.url}}" alt="{{obj.name}}"/><img src='{{obj.thumb.url}}'/></a>
+		{% endfor %}
+	{%else%}
+		No uploads yet :(<br>
+	{%endif%}
+	</div>
+</body>
+</html>
+{% include "common/footer.html" %}
+{% include "common/close.html" %}

@@ -1,0 +1,15 @@
+{% include "common/header.html" %}
+<div id="container">
+    <div class="span12 center well">
+	<form class="form form-horizontal" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-large btn-primary" type="submit" value="Ajouter">
+	</form>
+</div>
+{% include "common/footer.html" %}
+<script src="/datas/js/ckeditor/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('id_description');
+</script>
+{% include "common/close.html" %}

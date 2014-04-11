@@ -1,0 +1,21 @@
+{% include "common/header.html" %}
+<div id="container">
+    <div class="span12 center well">
+    <div class="alert alert-danger">
+    <button class="close" data-dismiss="alert">×</button>
+    Attention, vous devez uploader une archive .zip (.rar,.tar.gz,etc.. non compatibles) de vos images prêtes pour être exposées.<br>
+    Vous ne pourrez pas redimensionner ou effectuer de rotation d'image via la gallerie.<br>
+    </div>
+	Veuillez remplir les informations suivantes, nécessaires à la création de votre nouvelle gallerie:<br>
+	<form class="form form-horizontal" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-large btn-primary" type="submit" value="Créer la gallerie">
+	</form>
+</div>
+{% include "common/footer.html" %}
+<script src="/datas/js/ckeditor/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('id_desc');
+</script>
+{% include "common/close.html" %}

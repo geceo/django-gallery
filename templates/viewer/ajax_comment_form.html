@@ -1,0 +1,42 @@
+<div id="ajaxForm">
+    <h3>Exprimez vous!</h3>
+{% if comment_form.errors %}
+    <div class="alert alert-errors">
+{% for field in comment_form %}
+    {% if field.errors %}
+        {{field.label}}: {%for error in field.errors %} {{ error }} {%endfor%}<br>
+    {% endif %}
+{% endfor %}
+    </div>
+{% endif %}
+    <form id="ajaxFormComment" class="form" method="post">
+    {% csrf_token %}
+        <div class="span2">
+            <fieldset>
+                <table class="table-condensed center">
+                <tr>
+                    <tr><td>{{comment_form.author.label}}</td><td>{{comment_form.author }}</td></tr>
+                    <tr><td>{{comment_form.email.label}}</td><td>{{comment_form.email }}</td></tr>
+                    <tr><td>{{comment_form.url.label}} <i>(facultatif)</i></td><td>{{comment_form.url }}</td></tr>
+                </tr>
+                </table>
+            </fieldset>
+        </div>
+        <div class="span2">
+            <fieldset>
+                <table class="table-condensed center">
+                    <tr><td>{{comment_form.title.label}}</td><td>{{comment_form.title}}</td></tr>
+                    <tr><td>{{comment_form.content.label}}</td><td>{{comment_form.content}}</td></tr>
+                </table>
+            </fieldset>
+        </div>
+        <div class="span1 center">
+            <input class="btn btn-success btn-mini" type="submit"></input>
+        </div>
+    </div>
+    </form>
+</div>
+<script>
+$('#ajaxFormComment').submit(function() { postComment(); return(false);});
+</script>
+

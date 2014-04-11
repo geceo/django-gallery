@@ -1,0 +1,17 @@
+--- templates/viewer/gallery.html (révision 248)
++++ templates/viewer/gallery.html (copie de travail)
+@@ -114,12 +114,13 @@
+ 
+ {% include "common/footer.html" %}
+ <script language="javascript">
++.carousel();
+ .bind('click',function(event){
+     idThumb = event.currentTarget.id;
+     .carousel(parseInt(idThumb.replace('thumb','')));
+     .modal('toggle');
+ });
+-.carousel();
++
+ .bind('slid',function(event){
+     idItem = .filter('.item')[0].id;
+     idItem = idItem.replace('item','thumb');

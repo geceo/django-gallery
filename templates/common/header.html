@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Gérald Colangelo's portfolio</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Photo. Urbex, Paysages, Urbain, Rural, Atmosphère, ambiance sombre">
+    <meta name="author" content="G&eacute;rald Colangelo">
+    
+    <!-- The only one we load here ... more easy :/ -->
+    <script src="/datas/bootstrap/js/jquery.js"></script>
+
+    <!-- Le debug 
+    {{ debug }}
+    -->
+    <!-- Le styles -->
+
+    <link href="/datas/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/datas/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/datas/css/myBSadd.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/datas/bootstrap/ico/favicon.ico">
+    <link rel='alternate' type='application/rss+xml' title='RSS' href='/feed/' />
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+{% if navpath %}
+            <ul class="nav">
+            {% for component in navpath %}
+                {% if forloop.counter0 == 0 %}
+                <li><a class="brand" href="{{component.0}}">{{component.1|capfirst}}</a></li>
+                {% else %}
+                <li><a class="" href="{{component.0}}">{{component.1|capfirst}}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+{% else %}
+          <a class="brand" href="/">{{general_title}}</a>
+{% endif %}
+          {% if user.is_authenticated %}
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i>&nbsp;{{user}}&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/admin/">Administration</a></li>
+              <li><a href="/logout">Se déconnecter</a></li>
+            </ul>
+          </div>
+          {% endif %}
+        <a class="navbar-text pull-right" href="/feed/"><img src="/datas/img/feedicon.png" alt="feed RSS"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="nav-collapse pull-left">
+                    <ul class="nav">
+                        <li><a href="/about/">A propos</a></li>
+                        <li><a href="/buy/">Acheter des tirages originaux</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+
+                <!-- If we're watching to a gallery, print thumbnail button and comments -->
+{% if images %}
+                <div class="btn-group pull-right">
+                <a class="btn btn-small" data-toggle="modal" href="#thumbs"><span class="icon-th-large"></span>&nbsp;{{images|length}} images&nbsp;</a>
+                </div>
+    {% if comments %}
+                <div class="btn-group pull-right">
+        {% if comments|length > 1 %}
+                    <a class="btn btn-small" data-toggle="modal" href="#comment"><span class="icon-pencil"></span>&nbsp;{{comments|length}} Commentaires&nbsp;</a>
+        {% elif comments|length > 0 %}
+                    <a class="btn btn-small" data-toggle="modal" href="#comment"><span class="icon-pencil"></span>&nbsp;{{comments|length}} Commentaire&nbsp;</a>
+        {% else %}
+                    <a class="btn btn-small" data-toggle="modal" href="#comment"><span class="icon-pencil"></span>&nbsp;Laisser un commentaire&nbsp;</a>
+        {% endif %}
+                </div>
+    {% endif %}
+ 
+{% endif %}
+
+                <!-- end of gallery specifics code -->
+                <!-- Social buttons ... because it does matter -->
+                <div class="btn-group pull-right">
+                <!-- Facebook dirty iframe: take care of width and height ... -->
+                <iframe src="//www.facebook.com/plugins/like.php?href={{page_address|urlencode}}&amp;layout=button_count&amp;action=like&amp;colorscheme=dark&amp;" scrolling="no" frameborder="0" style="border:none; overflow:hidden;width:80px;height:21px;margin-top:4px;" allowTransparency="true"></iframe>
+                <!-- Twitter button code -->
+                <a href="https://twitter.com/share" data-text="{{title}} - {{page_address}}" data-url={{page_address|urlencode}} class="twitter-share-button" data-lang="en">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <!-- End of social code -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+
+ 

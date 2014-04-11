@@ -1,0 +1,44 @@
+{% include "common/header.html" %}
+<div id="container-fluid">
+    <div class="span12 center">
+        <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#infos" data-toggle="tab">Infos</a></li>
+                <li class=""><a href="#images" data-toggle="tab">Images</a></li>
+            </ul>
+            <div class="tab-content span10">
+            
+                <div id="infos" class="tab-pane active fade in well">
+                    <p>
+                    {{ infostr|safe }}
+                    </p>
+                    <form class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    {{ gallery.as_p }}
+                    <input class="btn btn-large btn-primary" type="submit" name="editGal" value="Modify gallery">
+                    </form>
+                </div>
+                
+                <div id="images" class="tab-pane fade in">
+                    <form class="form form-horizontal" method="POST">
+                    {% csrf_token %}
+                    {{ imagesForm.management_form }}
+{% for tupple in mixed %}
+                    <div class="span6">
+                        <img height=150 src='{{tupple.0.thumb.url}}'>
+                        <table>{{tupple.1}}</table>
+                    </div>
+{% endfor %}
+                    <input  class="btn btn-large btn-primary" type="submit" name="editImg" value="Modify pictures">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "common/footer.html" %}
+<script src="/datas/js/ckeditor/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('id_desc');
+</script>
+{% include "common/close.html" %}

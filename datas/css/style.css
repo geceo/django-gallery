@@ -1,0 +1,191 @@
+body { 
+background: url('/datas/img/Gerald%20Colangelo.png') no-repeat;
+font-size: 14px;
+margin: 0px;
+padding: 0px;
+}
+
+#page {
+background-color: #000;
+color: #fff;
+position: absolute;
+left: 0px;
+right: 0px;
+margin-top: 100px;
+height: 700px;
+}
+
+#content {
+color: #fff;
+width: 1100px;
+height: 700px;
+overflow: auto;
+font-size: 14px;
+margin-left: auto;
+margin-right: auto;
+}
+
+#content h1 {
+width: 100%;
+text-align: center;
+font-size: 14px;
+color: black;
+}
+
+#loading {
+display: none;
+position: fixed;
+top: 0px;
+left: 0px;
+height: 40px;
+background-color: white;
+color: black;
+font-size: 20px;
+z-index: 10;
+}
+
+
+#leftPane{
+background-color: #fff;
+color: #000;
+left: 0px;
+bottom: 0px;
+width: 350px;
+margin: 5px;
+float: left;
+font-size: 12px;
+}
+
+#leftPane a {
+color: #000;
+}
+
+#leftPane h1 {
+border-bottom: 1px solid black;
+width: 100%;
+font-size: 14px;
+margin: 0px;
+background-color:#555;
+color: #fff;
+text-align: center;
+}
+
+
+#leftPaneDescription {
+display: block;
+display: block;
+padding: 10px;
+}
+
+#thumbs {
+display:block;
+width: 350px;
+height: 370px;
+}
+
+
+#thumbs img {
+width: 100px;
+height: 100px;
+border: 0px;
+}
+
+
+#images {
+float: left;
+}
+
+#image {
+display: block;
+}
+
+
+#gallery {
+margin: 5px;
+padding: 0px;
+display: block;
+float: left;
+max-width: 700px;
+max-height: 700px;
+border: 1px solid #555;
+}
+
+#caption {
+width: 100%;
+padding-top: 2px;
+padding-bottom: 2px;
+text-align:center;
+}
+
+#image {
+margin-left: auto;
+margin-right: auto;
+}
+
+
+#image img {
+top: 10px;
+max-width: 600px;
+max-height: 600px;
+}
+
+#controls a {
+padding: 2px;
+}
+
+.pagination{
+display: block;
+width: 100%;
+text-align: center;
+}
+
+div.categoryDescritpion{
+display: block;
+width: 300px;
+border: 2px solid red;
+}
+
+li.galleryBox {
+position: relative;
+text-align: center;
+background-color: #fff;
+margin: 5px;
+padding: 0px;
+width: 170px;
+height: 170px;
+float:left;
+list-style-type: none;
+}
+
+.galleryBox img{
+height: 100px;
+width: 100px;
+border: 0px;
+}
+
+div.galleryDescription {
+color: #000;
+}
+
+.galleryLink{
+color: #000;
+}
+
+span.galleryTitle {
+display:block;
+background-color: #555;
+color: #fff;
+width: 100%;
+text-align: center;
+margin-bottom: 2px;
+}
+
+table,tr,td {
+color: #fff;
+border: 1px solid white;
+border-collapse: collapse;
+}
+
+table a {
+color: #fff;
+}

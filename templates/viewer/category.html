@@ -1,0 +1,39 @@
+{% include "common/header.html" %}
+        <div class="hero-unit center">
+            <h2>{{category.name}}</h2>
+            <p>{{category.description|safe}}</p>
+        </div>
+
+        {% for gallery in galleries %}
+        <div class="row well center">
+                <div class="span2">
+<a href="/gallery/{{gallery.gallery.category.name|escape}}/{{gallery.gallery.title|escape}}/" alt="{{gallery.gallery.title|escape}} dans {{gallery.gallery.category.name|escape}}">
+                    <img class="thumbnail" src="{{gallery.cover.thumb.url}}"></img>
+</a>
+                </div>
+                <div class="span8">
+                    <p>
+                        <a href="/gallery/{{gallery.gallery.category.name|escape}}/{{gallery.gallery.title|escape}}/" alt="{{gallery.gallery.title|escape}} dans {{gallery.gallery.category.name|escape}}">
+                        <h3>{{gallery.gallery.title}} - {{gallery.gallery.created}}</h3></a>
+{% if gallery.gallery.desc %} 
+    {% if gallery.gallery.desc|length > 80 %}
+        {{gallery.gallery.desc|safe|truncatewords:80}} [consultez l'album pour la suite]
+    {% else %}
+        {{gallery.gallery.desc}}
+    {% endif %}
+{% else %} 
+Pas de description!
+{% endif %}
+                    </p>
+                </div> <!-- /div span8 -->
+        </div> <!-- /div row -->
+        {% endfor %}
+</div> <!-- /container -->
+
+{% include "common/footer.html" %}
+
+<script>
+$('.thumbnail').popover();
+</script>
+
+{% include "common/close.html" %}

@@ -1,0 +1,58 @@
+{% include "common/header.html" %}
+<div class="container">
+    <div class="span12 center">
+        <div class="tabbable well">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+                <li class=""><a href="#category" data-toggle="tab">Category</a></li>
+                <li class=""><a href="#gallery" data-toggle="tab">Gallery</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div id="general" class="tab-pane active fade in">
+                <form class="form form-horizontal" method="POST" target="/admin/general/">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit">
+                </form>
+                </div>
+                <div id="category" class="tab-pane fade in">
+                        <p>
+                            <table class="table">
+                            <tr><th>Category name</th><th>Category description</th><th colspan="2">Action</th></tr>
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{category.name}}</td>
+                                <td>{{category.description|safe|truncatewords:100}}</td>
+                                <td><a class="btn btn-mini btn-success" href="/admin/editCategory/{{category.pk}}/">Edit</a></td>
+                                <td><a class="btn btn-mini btn-danger" href="/admin/deleteCategory/{{category.pk}}/">Delete</a></td>
+                            </tr> 
+                            {% endfor %}
+                            </table>
+                            <a class="btn btn-primary btn-large" href="/admin/addCategory">Add a category</a>
+                        </p>
+                </div>
+
+                <div id="gallery" class="tab-pane fade in">
+                    <p>
+                        <table class="table">
+                        <tr><th>Gallery name</th><th>Gallery description</th><th colspan="2">Actions</th></tr>
+                        {% for gallery in galleries %}
+                        <tr>
+                            <td>{{gallery.title}}</td>
+                            <td>{{gallery.desc|safe|truncatewords:100}}</td>
+                            <td><a class="btn btn-mini btn-success" href="/admin/editGallery/{{gallery.pk}}/">Edit</a></td>
+                            <td><a class="btn btn-mini btn-danger" href="/admin/deleteGallery/{{gallery.pk}}/">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                        </table>
+                        <a class="btn btn-primary btn-large" href="/admin/addGallery">Add a gallery</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "common/footer.html" %}
+{% include "common/close.html" %}

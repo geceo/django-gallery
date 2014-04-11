@@ -1,0 +1,10 @@
+{% if comments %}
+    {% for comment in comments %}
+                <div class="alert alert-info">
+                <b>{% if comment.url %}<a href="{{comment.url}}">{{comment.author}}</a>{%else%}{{comment.author}}{%endif%}: {{comment.title}}</b>&nbsp;({{comment.created}})<br>
+                <p>{{comment.content}}</p>
+                </div>
+    {% endfor %}
+{% else %}
+            <p><b>Soyez le premier à laisser un commentaire !</b></p>
+{% endif %}
