@@ -70,7 +70,7 @@ def index(request):
 def addGallery(request):
     if request.method == 'GET':
         form = UploadForm()
-        c  = RequestContext({
+        c  = RequestContext(request, {
         'form' : form
         })
         c.update(csrf(request))
