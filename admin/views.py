@@ -70,7 +70,7 @@ def index(request):
 def addGallery(request):
     if request.method == 'GET':
         form = UploadForm()
-        c  = RequestContext({
+        c  = RequestContext(request, {
         'form' : form
         })
         c.update(csrf(request))
@@ -142,7 +142,7 @@ def addGallery(request):
         else:
             c = RequestContext(request,csrf(request))
             c['form'] = form
-            return(SimpleResponseTemplate('admin/upload.html', c))
+            return(SimpleTemplateResponse('admin/upload.html', c))
 
 		
 def editGallery(request,id):
@@ -194,7 +194,7 @@ def addCategory(request):
             return(HttpResponseRedirect('/admin/'));
     c = RequestContext(request, { 'form': form})
     c.update(csrf(request))
-    return(SimpleResponseTemplate('admin/addCategory.html',c))
+    return(SimpleTemplateResponse('admin/addCategory.html',c))
         
 
 def editCategory(request,id):
